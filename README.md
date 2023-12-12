@@ -9,7 +9,7 @@
 ### [https://yarovoydm.github.io/pokis/]
 
 
-№ Technologies:
+# Technologies:
 ### `React + Typescript`
 ### `Redux-toolkit`
 ### `Eslint`

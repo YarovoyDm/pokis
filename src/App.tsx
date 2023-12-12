@@ -1,26 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+import Pokemons from './containers/Pokemons/Pokemons';
+import Pokemon from './containers/Pokemon/Pokemon';
+
 import './App.css';
 
-function App() {
+const App:React.FC = () =>  {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path="/" element={<Pokemons />} />
+        <Route path="/:pokemonName" element={<Pokemon />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;

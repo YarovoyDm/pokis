@@ -1,0 +1,24 @@
+{
+    "extends": [
+        "react-app",
+        "react-app/jest"
+    ],
+    "rules": {
+        "no-unused-vars": "warn",
+        "no-console": "warn",
+        "jsx-quotes": ["error", "prefer-double"],
+        "prefer-const": "warn",
+        "indent": ["warn", 4],
+        "comma-dangle": ["error", "always-multiline"],
+        "semi": "error",
+        "no-use-before-define": "warn",
+        "one-var-declaration-per-line": "warn",
+        "prefer-arrow-callback": "warn",
+        "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
+        "object-curly-spacing": ["error", "always", { "objectsInObjects": true }],
+        "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+        "newline-after-var": ["error", "always"],
+        "no-multiple-empty-lines": ["error", { "max": 1 }],
+        "@typescript-eslint/no-explicit-any": "warn"
+      }
+}

@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 import { Pokemons } from '../types/Pokemons';
+import { RootState } from '.';
 
 const initialPokemonsState = {
     allpokemons: [],
@@ -45,3 +46,10 @@ export const {
     updatePokemonType,
     updatePokemonsByType,
 } = pokemonsSlice.actions;
+
+const selectPokemons = (state: RootState) => state.pokemons;
+
+export const selectAllPokemons = createSelector(selectPokemons, (state: Pokemons) => state.allpokemons);
+export const selectPokemonType = createSelector(selectPokemons, (state: Pokemons) => state.pokemonType);
+export const selectPokemonsByType = createSelector(selectPokemons, (state: Pokemons) => state.pokemonsByType);
+export const selectPokemonInfo = createSelector(selectPokemons, (state: Pokemons) => state.pokemonInfo);

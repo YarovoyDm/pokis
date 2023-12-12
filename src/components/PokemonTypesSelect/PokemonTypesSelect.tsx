@@ -2,19 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
-import { useDispatch, useSelector } from "react-redux";
 import { AllTypes } from '../../types/Pokemons';
 import { getTypes } from '../../API/getTypes';
-import { AppDispatch, RootState } from "../../reducers";
-import { updatePokemonType } from '../../reducers/PokemonsReducer';
+import { useAppSelector, useAppDispatch } from "../../reducers";
+import { updatePokemonType, selectPokemonType } from '../../reducers/PokemonsReducer';
 
 const PokemonTypesSelect:React.FC = () => {
-    const dispatch: AppDispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [typesSelectIsOpen, setTypesSelectIsOpen] = useState<boolean>(false);
     const [typesOptions, setTypesOptions] = useState<AllTypes[]>([]);
     const souldWeFetchTypes = typesSelectIsOpen && typesOptions.length === 0;
-    const store = useSelector((state: RootState) => state);
-    const typeName = store.pokemons.pokemonType.typeName;
+    const typeName = useAppSelector(selectPokemonType).typeName;
 
     useEffect(() => {
         let active = true;

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../reducers";
+import { useAppSelector, useAppDispatch } from "../../reducers";
 import {
     updatePokemonInfo,
     updatePokemonType,
+    selectPokemonInfo,
 } from '../../reducers/PokemonsReducer';
 import { Moves, PokemonTypes } from '../../types/Pokemons';
 import { getPokemonInfo } from '../../API/getPokemonInfo';
@@ -13,9 +13,10 @@ import styles from './Pokemon.module.scss';
 
 const Pokemon:React.FC = () => {
     const navigate = useNavigate();
-    const dispatch: AppDispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const { pokemonName } = useParams();
-    const store = useSelector((state: RootState) => state.pokemons.pokemonInfo);
+    const pokemonInfo = useAppSelector(selectPokemonInfo);
+
     const [isLoading, setIsloading] = useState(true);
 
     useEffect(() => {
@@ -25,20 +26,20 @@ const Pokemon:React.FC = () => {
         });
     }, [pokemonName]);
 
-    const { types, name, moves, sprites } = store;
+    const { types, name, moves, sprites } = pokemonInfo;
     const pokemonAvatar = "url(" + `${sprites && sprites.front_default}` + ")";
 
-    const typesRender = () => {
+    const typesRender = useCallback(() => {
         return types && types.map((item: PokemonTypes) => {
             return <div key={item.id} className={styles.pokemonType} onClick={() => onTypeClick(item)}>{item.type.name}</div>;
         });
-    };
+    }, [types]);
 
-    const movesRender = () => {
+    const movesRender = useCallback(() => {
         return moves && moves.map((item: Moves) => {
             return <div className={styles.move} key={item.move.url}>{item.move.name}</div>;
         });
-    };
+    }, [moves]);
 
     const onTypeClick = (data: PokemonTypes) => {
         const dataForSaving = {

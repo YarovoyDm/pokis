@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pokis/static/css/main.a9256258.css",
+    "main.js": "/pokis/static/js/main.5b26c78f.js",
+    "static/js/787.7058240f.chunk.js": "/pokis/static/js/787.7058240f.chunk.js",
+    "index.html": "/pokis/index.html",
+    "main.a9256258.css.map": "/pokis/static/css/main.a9256258.css.map",
+    "main.5b26c78f.js.map": "/pokis/static/js/main.5b26c78f.js.map",
+    "787.7058240f.chunk.js.map": "/pokis/static/js/787.7058240f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a9256258.css",
+    "static/js/main.5b26c78f.js"
+  ]
+}

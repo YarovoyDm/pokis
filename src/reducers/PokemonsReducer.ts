@@ -1,5 +1,5 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
-import { Pokemons } from '../types/Pokemons';
+import { Pokemons } from 'types/Pokemons';
 import { RootState } from '.';
 
 const initialPokemonsState = {

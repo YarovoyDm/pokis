@@ -1,4 +1,4 @@
-type AllPokemons = {
+export type AllPokemons = {
     name: string,
     url: string,
 };

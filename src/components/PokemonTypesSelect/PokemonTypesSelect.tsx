@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
-import { AllTypes } from '../../types/Pokemons';
-import { getTypes } from '../../API/getTypes';
-import { useAppSelector, useAppDispatch } from "../../reducers";
-import { updatePokemonType, selectPokemonType } from '../../reducers/PokemonsReducer';
+import { AllTypes } from 'types/Pokemons';
+import { getTypes } from 'API';
+import { useAppSelector, useAppDispatch } from 'reducers';
+import { updatePokemonType, selectPokemonType } from 'reducers/PokemonsReducer';
 
-const PokemonTypesSelect:React.FC = () => {
+type Props = {
+    noOptionsText?: string,
+    placeholder?: string,
+};
+
+const PokemonTypesSelect:React.FC<Props> = ({ noOptionsText, placeholder }) => {
     const dispatch = useAppDispatch();
     const [typesSelectIsOpen, setTypesSelectIsOpen] = useState<boolean>(false);
     const [typesOptions, setTypesOptions] = useState<AllTypes[]>([]);
@@ -59,10 +64,11 @@ const PokemonTypesSelect:React.FC = () => {
             options={typesOptions && typesOptions.map(({ name }: { name: string }) => name)}
             loading={souldWeFetchTypes}
             onChange={typeHandleChange}
+            noOptionsText={noOptionsText || "No Options"}
             renderInput={(params) => (
                 <TextField
                 {...params}
-                label="Search for pokemon by type"
+                label={placeholder || "Type something..."}
                 InputProps={{
                     ...params.InputProps,
                     endAdornment: (

@@ -3,8 +3,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Pokemons from './containers/Pokemons/Pokemons';
-import Pokemon from './containers/Pokemon/Pokemon';
+import { Pokemons, Pokemon } from 'containers';
 
 import './App.css';
 

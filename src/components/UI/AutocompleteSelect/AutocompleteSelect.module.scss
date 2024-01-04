@@ -3,7 +3,7 @@
 
 .search{
     background: $heavy_metal;
-    border-radius: 8px;
+    border-radius: $system_border_radius;
     .inputRoot{
         &::placeholder{
             color: $gray_nurse;
@@ -20,7 +20,6 @@
                     opacity: 0.5;
                 }
             }
-            
         }
         svg > path{
             fill: $gray_nurse;

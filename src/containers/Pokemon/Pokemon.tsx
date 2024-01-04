@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
+import { getPokemonInfo } from 'API';
 import { useAppSelector, useAppDispatch } from "reducers";
 import {
     updatePokemonInfo,
@@ -7,7 +8,6 @@ import {
     selectPokemonInfo,
 } from 'reducers/PokemonsReducer';
 import { Moves, PokemonTypes } from 'types/Pokemons';
-import { getPokemonInfo } from 'API';
 
 import styles from './Pokemon.module.scss';
 

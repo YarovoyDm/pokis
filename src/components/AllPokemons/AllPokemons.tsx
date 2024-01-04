@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AllPokemons } from 'types/Pokemons';
+import { Pagination } from 'components';
 import { DEFAULT_ROW_PER_PAGE, DEFAULT_PAGE_NUMBER } from 'constants/Pokemons';
 import { useLocalStorage } from 'hooks/useLocalStorage';
-import { Pagination } from 'components';
+import { AllPokemons } from 'types/Pokemons';
 
 import styles from './AllPokemons.module.scss';
 

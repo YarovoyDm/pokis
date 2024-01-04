@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useAppSelector, useAppDispatch } from 'reducers';
-import { useNavigate } from 'react-router-dom';
-import { selectPokemonType, updatePokemonType } from 'reducers/PokemonsReducer';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from 'react-router-dom';
 import { getTypes } from 'API';
+import { useAppSelector, useAppDispatch } from 'reducers';
+import { selectPokemonType, updatePokemonType } from 'reducers/PokemonsReducer';
+import { AllPokemons } from 'types/Pokemons';
 
 import styles from './AutocompleteSelect.module.scss';
 
 type AutocompleteType = {
     noOptionsText?: string,
     placeholder?: string,
-    options?: Array<any>,
+    options?: Array<AllPokemons>,
     width?: number,
     size?: "small" | "medium",
     fetchWhenOpen?: boolean,
@@ -29,9 +30,10 @@ const AutocompleteSelect:React.FC<AutocompleteType> = ({
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [selectIsOpen, setSelectIsOpen] = useState<boolean>(false);
-    const [selectOptions, setSelectOptions] = useState<Array<any>>([]);
+    const [selectOptions, setSelectOptions] = useState<Array<AllPokemons>>([]);
     const typeName: string | null = useAppSelector(selectPokemonType).typeName;
-    const shouldWeFetchTypes = useMemo((): boolean | undefined => selectIsOpen && fetchWhenOpen && selectOptions?.length === 0, [fetchWhenOpen, selectIsOpen, selectOptions]);
+    const shouldWeFetchTypes = useMemo((): boolean | undefined => 
+        (selectIsOpen && fetchWhenOpen && selectOptions?.length === 0), [fetchWhenOpen, selectIsOpen, selectOptions]);
 
     useEffect(() => {
         options && setSelectOptions(options);

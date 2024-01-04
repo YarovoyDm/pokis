@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from "reducers";
 import  { getPokemons } from 'API';
 import { getPokemonsByType } from 'API';
 import { AllPokemons, AutocompleteSelect } from 'components';
+import { useAppSelector, useAppDispatch } from "reducers";
 import {
     updatePokemons,
     updatePokemonsByType,

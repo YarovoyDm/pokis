@@ -1,0 +1,24 @@
+// Imports must be written in the following rules:
+
+----Global imports----
+
+// react
+// redux
+// axios
+// ect.
+
+----Local imports----
+
+@Local imports by alias in the following order:
+
+// API
+// components
+// constants
+// containers
+// hooks
+// reducers
+// types
+
+@Local imports by full path
+
+----Styles----

@@ -2,38 +2,53 @@
 @import "scss/mixins.scss";
 
 .pageWrapper{
-    padding: 50px;
     position: relative;
+    @include flex-center;
+    height: 100vh;
     .backButton{
         position: absolute;
         top: 30px;
         left: 30px;
         cursor: pointer;
-        background: #c7effb;
-        border-radius: 5px;
-        border: solid 1px #b15858;
+        background: $gray_nurse;
+        border-radius: $system_border_radius;
+        border: solid 1px $heavy_metal;
         padding: 5px;
         &:hover{
-            background: white;
+            background: $silver;
         }
     }
     .pokemonDescription{
+        padding: 20px;
+        width: fit-content;
+        height: fit-content;
+        max-width: 80%;
+        background: $gray_nurse;
+        border-radius: $system_border_radius;
+        .pokemonTypes,
+        .pokemonMoves{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
         .pokemonInformation{
             @include flex-center;
             .pokemonName{
                 font-size: 35px;
+                text-transform: capitalize;
             }
             .pokemonAvatar{
-                width: 100px;
-                height: 100px;
+                width: 120px;
+                height: 120px;
                 background-repeat: no-repeat;
                 background-size: contain;
             }
         }
         .move,
         .pokemonType{
-            border: solid 1px grey;
-            border-radius: 5px;
+            border-radius: $system_border_radius;
             padding: 5px;
             width: fit-content;
             text-align: center;
@@ -41,12 +56,18 @@
             line-height: 20px;
         }
         .move{
-            background: #cbcbcb;
+            background: $silver;
+            text-transform: capitalize;
         }
         .pokemonType{
+            border: solid 1px $heavy_metal;
             cursor: pointer;
+            background: $gray_nurse;
+            color: $heavy_metal;
+            text-transform: capitalize;
             &:hover{
-                color: rgb(49, 170, 38);
+                background: $heavy_metal;
+                color: $gray_nurse;
             }
             &:not(:first-child) {
                 margin: 0 10px;
@@ -61,15 +82,7 @@
     height: 100vh;
     line-height: 100vh;
     font-size: 35px;
-}
-
-.pokemonTypes,
-.pokemonMoves{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
+    color: white;
 }
 
 .content{

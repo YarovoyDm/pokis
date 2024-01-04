@@ -17,7 +17,7 @@ const Pokemon:React.FC = () => {
     const { pokemonName } = useParams();
     const pokemonInfo = useAppSelector(selectPokemonInfo);
 
-    const [isLoading, setIsloading] = useState(true);
+    const [isLoading, setIsloading] = useState<boolean>(true);
 
     useEffect(() => {
         pokemonName && getPokemonInfo(pokemonName).then(res => {
@@ -27,7 +27,7 @@ const Pokemon:React.FC = () => {
     }, [pokemonName]);
 
     const { types, name, moves, sprites } = pokemonInfo;
-    const pokemonAvatar = useMemo(() => "url("+ `${sprites && sprites.front_default}` +")", [sprites]);
+    const pokemonAvatar = useMemo((): string => "url("+ `${sprites && sprites.front_default}` +")", [sprites]);
 
     const typesRender = useCallback(() => {
         const onTypeClick = (data: PokemonTypes) => {
@@ -40,7 +40,7 @@ const Pokemon:React.FC = () => {
             navigate('/');
         };
 
-        return types && types.map((item: PokemonTypes) => {
+        return types && types.map((item: PokemonTypes)  => {
             return <div key={item.id} className={styles.pokemonType} onClick={() => onTypeClick(item)}>{item.type.name}</div>;
         });
     }, [types]);

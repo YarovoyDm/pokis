@@ -1,0 +1,81 @@
+@import "scss/_variables.scss";
+@import "scss/mixins.scss";
+
+.wrapper{
+    @include flex-center;
+    width: fit-content;
+    height: 40px;
+    margin: auto;
+    .pageCount{
+        background: $gray_nurse;
+        height: 38px;
+        border-top: solid 1px $heavy_metal;
+        border-bottom: solid 1px $heavy_metal;
+        width: 140px;
+        @include flex-center;
+        .pageNumber,
+        .pageTitle{
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .pageTitle{
+            margin-right: 10px;
+        }
+        .pageNumber{
+            height: 100%;
+            width: fit-content;
+            @include flex-center;
+        }
+    }
+    .button{
+        width: 50px;
+        height: 38px;
+        background: $gray_nurse;
+        @include flex-center;
+        cursor: pointer;
+        border: solid 1px $heavy_metal;
+        transition: 0.5s;
+        svg{
+            width: 20px;
+            height: 20px;
+            path{
+                fill: $heavy_metal;
+            }
+        }
+        &:first-child{
+            border-bottom-left-radius: 30px;
+            border-top-left-radius: 30px;
+        }
+        &:last-child{
+            border-top-right-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+        &:hover{
+            background: $heavy_metal;
+            svg path{
+                fill: $gray_nurse;
+            }
+        }
+        &:active{
+            transition: 0s;
+            opacity: 0.5;
+        }
+    }
+    .disabled{
+        opacity: 0.5;
+        cursor: default;
+        svg{
+            width: 20px;
+            height: 20px;
+            path{
+                fill: $boulder;
+            }
+        }
+        &:hover{
+            background: $gray_nurse;
+            svg path{
+                fill: $boulder;
+            }
+        }
+    }
+}

@@ -1,3 +1,6 @@
+@import "scss/_variables.scss";
+@import "scss/mixins.scss";
+
 .pageWrapper{
     padding: 50px;
     position: relative;
@@ -13,23 +16,18 @@
         &:hover{
             background: white;
         }
-        user-select: none;
     }
     .pokemonDescription{
         .pokemonInformation{
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            @include flex-center;
             .pokemonName{
                 font-size: 35px;
-                user-select: none;
             }
             .pokemonAvatar{
                 width: 100px;
                 height: 100px;
                 background-repeat: no-repeat;
                 background-size: contain;
-                user-select: none;
             }
         }
         .move,
@@ -41,7 +39,6 @@
             text-align: center;
             height: 20px;
             line-height: 20px;
-            user-select: none;
         }
         .move{
             background: #cbcbcb;
@@ -73,7 +70,6 @@
     align-items: flex-start;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    user-select: none;
 }
 
 .content{

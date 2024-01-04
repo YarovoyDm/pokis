@@ -1,10 +1,9 @@
-import React, { useEffect, useCallback } from 'react';
-import { Paper } from '@mui/material';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from "reducers";
 import  { getPokemons } from 'API';
 import { getPokemonsByType } from 'API';
-import { PokemonTypesSelect, SearchPokemonByName, PokemonsTable } from 'components';
+import { AllPokemons, AutocompleteSelect } from 'components';
 import {
     updatePokemons,
     updatePokemonsByType,
@@ -17,11 +16,15 @@ import styles from './Pokemons.module.scss';
 
 const Pokemons:React.FC = () => {
     const dispatch = useAppDispatch();
-
+    const pokemonPortView = useRef<HTMLDivElement>(null);
     const allPokemons = useAppSelector(selectAllPokemons);
     const typeUrl = useAppSelector(selectPokemonType).typeUrl;
     const typeName = useAppSelector(selectPokemonType).typeName;
     const pokemonsByType = useAppSelector(selectPokemonsByType);
+
+    useEffect(() => {
+        pokemonPortView.current?.scrollTo(0, 0);
+    }, [pokemonsByType]);
 
     useEffect(() => {
         typeUrl && getPokemonsByType(typeUrl).then(res => dispatch(updatePokemonsByType(res.data.pokemon)));
@@ -36,31 +39,34 @@ const Pokemons:React.FC = () => {
         return pokemonsByType.map(item => {
             return (
                 <div className={styles.pokemonsByType} key={item.pokemon.url}>
-                    <Link to={`/${item.pokemon.name}`}>{item.pokemon.name}</Link>
+                    <Link to={`/${item.pokemon.name}`} className={styles.pokemon}>{item.pokemon.name}</Link>
                 </div>
             );
         });
     }, [pokemonsByType]);
      
     return (
-        <div>
-            <Paper sx={{ width: '50%', marginLeft: '25%' }}>
-                <SearchPokemonByName 
-                    pokemons={allPokemons}
-                    placeholder="Enter the pokemon's name..."
-                    noOptionsText="There is no such Pokemon"
-                />
-                <PokemonTypesSelect 
-                    placeholder="Enter the pokemon's type..."
-                    noOptionsText="There is no such type"
-                />
+        <div className={styles.pageWrapper}>
+            <div className={styles.mainBlock}>
+                <div className={styles.selectsBlock}>
+                    <AutocompleteSelect 
+                        options={allPokemons}
+                        placeholder="Enter the pokemon's name..."
+                        noOptionsText="There is no such Pokemon"
+                    />
+                    <AutocompleteSelect 
+                        fetchWhenOpen
+                        placeholder="Enter the pokemon's type..."
+                        noOptionsText="There is no such type"
+                    />
+                </div>
                 {typeUrl 
-                    ? <div className={styles.pokemonByTypeTitleWrapper}>
-                        <div className={styles.pokemonsByTypeTitle}>Result for: {typeName}</div>
+                    ? <div className={styles.pokemonByTypeTitleWrapper} ref={pokemonPortView}>
+                        <div className={styles.pokemonsByTypeTitle}>Result for: <div className={styles.typeName}>{typeName}</div></div>
                         {renderPokimonsByType()}
                     </div>
-                    : <PokemonsTable pokemons={allPokemons} />}
-            </Paper>
+                    : <AllPokemons pokemons={allPokemons} />}
+            </div>
         </div>
     );
 };

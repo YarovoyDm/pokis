@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background: #232825;
+  color: #232825;
+  user-select: none;
 }
 
 a {

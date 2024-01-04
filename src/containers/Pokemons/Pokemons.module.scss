@@ -1,14 +1,61 @@
-.pokemonByTypeTitleWrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 20px;
-    .pokemonsByType {
-        margin-bottom: 10px;
+@import "scss/_variables.scss";
+@import "scss/mixins.scss";
+
+.pageWrapper{
+    @include flex-center;
+    height: 100vh;
+    .mainBlock{
+        width: calc(550px - 40px);
+        height: 600px;
+        background: $gray_nurse;
+        padding: 20px;
+        border-radius: 8px;
+        .pokemonByTypeTitleWrapper{
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 20px;
+            align-items: flex-start;
+            padding-left: 20px;
+            height: 80%;
+            max-height: 80%;
+            overflow: auto;
+            margin-top: 20px;
+            .pokemonsByType {
+                margin-bottom: 10px;
+                .pokemon{
+                    @include pokemon;
+                }
+            }
+            .pokemonsByTypeTitle{
+                margin-bottom: 20px;
+                font-size: 25px;
+                width: 100%;
+                position: sticky;
+                top: 0;
+                background: $gray_nurse;
+                @include flex-center;
+                padding: 5px 0;
+                .typeName{
+                    margin-left: 10px;
+                    text-transform: capitalize;
+                    text-decoration: underline;
+                }
+                
+            }
+        }
+        .selectsBlock{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
     }
 }
 
-.pokemonsByTypeTitle{
-    margin-bottom: 20px;
-    font-size: 25px;
-}
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+@import "scss/_variables.scss";
+@import "scss/mixins.scss";
+
+.search{
+    background: $heavy_metal;
+    border-radius: 8px;
+    .inputRoot{
+        &::placeholder{
+            color: $gray_nurse;
+            font-size: 12px;
+        }
+        div{
+            border-radius: 10px;
+            input{
+                font-size: 14px;
+                color: $gray_nurse;
+                &::placeholder{
+                    font-size: 12px;
+                    color: $gray_nurse;
+                    opacity: 0.5;
+                }
+            }
+            
+        }
+        svg > path{
+            fill: $gray_nurse;
+            opacity: 0.5;
+        }
+    }
+}

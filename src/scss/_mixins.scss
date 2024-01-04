@@ -1,0 +1,28 @@
+@import "scss/_variables.scss";
+
+@mixin flex-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin pokemon() {
+    display: block;
+    text-transform: capitalize;
+    width: 130px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border: solid 1px $heavy_metal;
+    border-radius: $system_border_radius;
+    transition: 0.5s;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 5px;
+    &:hover{
+        color: $gray_nurse;
+        background: $heavy_metal;
+        text-decoration: none;
+    }
+}

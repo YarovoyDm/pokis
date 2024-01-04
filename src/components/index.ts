@@ -1,9 +1,9 @@
-import PokemonTypesSelect from "./PokemonTypesSelect/PokemonTypesSelect";
-import SearchPokemonByName from "./SearchPokemonByName/SearchPokemonByName";
-import PokemonsTable from './PokemonsTable/PokemonsTable';
+import AllPokemons from './AllPokemons/AllPokemons';
+import Pagination from './Pagination/Pagination';
+import AutocompleteSelect from './UI/AutocompleteSelect/AutocompleteSelect';
 
 export {
-    PokemonTypesSelect,
-    SearchPokemonByName,
-    PokemonsTable,
+    AllPokemons,
+    Pagination,
+    AutocompleteSelect,
 };

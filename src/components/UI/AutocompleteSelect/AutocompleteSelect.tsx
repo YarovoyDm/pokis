@@ -4,16 +4,16 @@ import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
 import { getTypes } from 'API';
-import { useAppSelector, useAppDispatch } from 'reducers';
-import { selectPokemonType, updatePokemonType } from 'reducers/PokemonsReducer';
-import { AllPokemons } from 'types/Pokemons';
+import { useAppSelector, useAppDispatch } from 'store';
+import { selectPokemonType, updatePokemonType } from 'store/pokemons';
+import { Pokemon } from 'types/Pokemons';
 
 import styles from './AutocompleteSelect.module.scss';
 
 type AutocompleteType = {
     noOptionsText?: string,
     placeholder?: string,
-    options?: Array<AllPokemons>,
+    options?: Array<Pokemon>,
     width?: number,
     size?: "small" | "medium",
     fetchWhenOpen?: boolean,
@@ -30,7 +30,7 @@ const AutocompleteSelect:React.FC<AutocompleteType> = ({
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [selectIsOpen, setSelectIsOpen] = useState<boolean>(false);
-    const [selectOptions, setSelectOptions] = useState<Array<AllPokemons>>([]);
+    const [selectOptions, setSelectOptions] = useState<Array<Pokemon>>([]);
     const typeName: string | null = useAppSelector(selectPokemonType).typeName;
     const shouldWeFetchTypes = useMemo((): boolean | undefined => 
         (selectIsOpen && fetchWhenOpen && selectOptions?.length === 0), [fetchWhenOpen, selectIsOpen, selectOptions]);
@@ -57,10 +57,10 @@ const AutocompleteSelect:React.FC<AutocompleteType> = ({
         };
     }, [shouldWeFetchTypes]);
 
-    const typeHandleChange = (event: React.SyntheticEvent<Element, Event>, pokemonType: string | null) => {
+    const typeHandleChange = (event: React.SyntheticEvent<Element, Event>, pokemonType: string | null): void => {
         const getUrlForType = pokemonType && selectOptions.filter(type => type.name === pokemonType)[0].url;
-        const prepareTypeName = pokemonType || null;
-        const prepareTypeUrl = getUrlForType || null;
+        const prepareTypeName = pokemonType;
+        const prepareTypeUrl = getUrlForType;
         const dataForSaving = {
             typeName: prepareTypeName,
             typeUrl: prepareTypeUrl,
@@ -72,18 +72,18 @@ const AutocompleteSelect:React.FC<AutocompleteType> = ({
     return (
         <Autocomplete
             open={selectIsOpen}
-            onOpen={() => {
+            onOpen={(): void => {
                 setSelectIsOpen(true);
             }}
-            onClose={() => {
+            onClose={(): void => {
                 setSelectIsOpen(false);
             }}
             sx={{ width: width || 230, "&.MuiSvgIcon-root": {
                 color: "white",
-              } }}
+            } }}
             size={ size || "small" }
             noOptionsText={noOptionsText || "No Options"}
-            onChange={(event: React.SyntheticEvent<Element, Event>, data: string | null) => {
+            onChange={(event: React.SyntheticEvent<Element, Event>, data: string | null): void => {
                 fetchWhenOpen ? typeHandleChange(event, data) : navigate(`/${data}`);
             }}
             defaultValue={fetchWhenOpen ? typeName : null}
@@ -113,7 +113,6 @@ const AutocompleteSelect:React.FC<AutocompleteType> = ({
                         ),
                     }}
                 />
-                
             }
             className={styles.search}
             classes={{ root: styles.autocompleteRoot }}

@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import cn from 'classnames';
+import { LOCAL_STORAGE_PAGE_KEY } from 'constants/Pokemons';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 
 import styles from './Pagination.module.scss';
@@ -13,16 +14,16 @@ type PaginationType = {
 };
 
 const Pagination:React.FC<PaginationType> = ({ page, setPage, pagesQuantity }) => {
-    const { setItemInLocalStorage } = useLocalStorage('page');
+    const { setItemInLocalStorage } = useLocalStorage(LOCAL_STORAGE_PAGE_KEY);
 
     const pageChange = useCallback((page: number): void => {
         setPage(page);
     }, [setPage]);
 
     const handleChangePage = (
-        event: any,
+        event: React.MouseEvent<HTMLElement>,
         newPage: number,
-      ): void => {
+    ): void => {
         if( newPage >= 0 && newPage <= (pagesQuantity - 1)){
             setItemInLocalStorage(newPage);
             pageChange(newPage);

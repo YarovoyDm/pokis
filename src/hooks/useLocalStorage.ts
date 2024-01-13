@@ -1,5 +1,5 @@
 export const useLocalStorage = (key: string) => {
-    const setItemInLocalStorage = (value: unknown) => {
+    const setItemInLocalStorage = (value: unknown): void => {
         window.localStorage.setItem(key, JSON.stringify(value));
     };
 
@@ -9,7 +9,7 @@ export const useLocalStorage = (key: string) => {
         return item ? JSON.parse(item) : undefined;
     };
 
-    const removeItemFromLocalStorage = () => {
+    const removeItemFromLocalStorage = (): void => {
         window.localStorage.removeItem(key);
     };
 

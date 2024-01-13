@@ -6,7 +6,7 @@
       "components/*": ["components/*"],
       "constants/*": ["constants/*"],
       "API/*": ["API/*"],
-      "reducers/*": ["reducers/*"],
+      "store/*": ["store/*"],
       "types/*": ["types/*"],
       "containers/*": ["containers/*"],
       "hooks/*": ["hooks/*"],

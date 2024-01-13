@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
-import pokemonsSlice from './PokemonsReducer';
+import pokemonsSlice from './pokemons';
 
 const rootReducer = combineReducers({
     pokemons: pokemonsSlice,

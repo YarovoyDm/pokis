@@ -3,31 +3,33 @@ import { Link } from 'react-router-dom';
 import  { getPokemons } from 'API';
 import { getPokemonsByType } from 'API';
 import { AllPokemons, AutocompleteSelect } from 'components';
-import { useAppSelector, useAppDispatch } from "reducers";
+import { useAppSelector, useAppDispatch } from "store";
 import {
     updatePokemons,
     updatePokemonsByType,
     selectAllPokemons,
     selectPokemonType,
     selectPokemonsByType,
-} from 'reducers/PokemonsReducer';
+} from 'store/pokemons';
+import { Pokemon } from 'types/Pokemons';
 
 import styles from './Pokemons.module.scss';
 
 const Pokemons:React.FC = () => {
     const dispatch = useAppDispatch();
     const pokemonPortView = useRef<HTMLDivElement>(null);
-    const allPokemons = useAppSelector(selectAllPokemons);
-    const typeUrl = useAppSelector(selectPokemonType).typeUrl;
-    const typeName = useAppSelector(selectPokemonType).typeName;
-    const pokemonsByType = useAppSelector(selectPokemonsByType);
+    const allPokemons: Pokemon[] = useAppSelector(selectAllPokemons);
+    const typeUrl: string | null = useAppSelector(selectPokemonType).typeUrl;
+    const typeName: string | null = useAppSelector(selectPokemonType).typeName;
+    const pokemonsByType: Array<{[key: string]: { name: string, url: string}}> = useAppSelector(selectPokemonsByType);
 
     useEffect(() => {
         pokemonPortView.current?.scrollTo(0, 0);
     }, [pokemonsByType]);
 
     useEffect(() => {
-        typeUrl && getPokemonsByType(typeUrl).then(res => dispatch(updatePokemonsByType(res.data.pokemon)));
+        typeUrl && getPokemonsByType(typeUrl)
+            .then(res => dispatch(updatePokemonsByType(res.data.pokemon)));
     }, [typeUrl]);
 
     useEffect(() => {
@@ -35,8 +37,8 @@ const Pokemons:React.FC = () => {
             .then(res => dispatch(updatePokemons(res.data.results)));
     }, []);
 
-    const renderPokimonsByType = useCallback(() => {
-        return pokemonsByType.map(item => {
+    const renderPokemonsByType = useCallback((): Array<React.ReactElement> => {
+        return pokemonsByType.map((item: {[key: string]: Pokemon}) => {
             return (
                 <div className={styles.pokemonsByType} key={item.pokemon.url}>
                     <Link to={`/${item.pokemon.name}`} className={styles.pokemon}>{item.pokemon.name}</Link>
@@ -63,7 +65,7 @@ const Pokemons:React.FC = () => {
                 {typeUrl 
                     ? <div className={styles.pokemonByTypeTitleWrapper} ref={pokemonPortView}>
                         <div className={styles.pokemonsByTypeTitle}>Result for: <div className={styles.typeName}>{typeName}</div></div>
-                        {renderPokimonsByType()}
+                        {renderPokemonsByType()}
                     </div>
                     : <AllPokemons pokemons={allPokemons} />}
             </div>

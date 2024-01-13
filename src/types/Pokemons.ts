@@ -1,4 +1,4 @@
-export type AllPokemons = {
+export type Pokemon = {
     name: string,
     url: string,
 };
@@ -10,6 +10,10 @@ export type PokemonTypes = {
         url: string,
     },
 };
+
+export type PokemonType = {
+    typeName: string | null, typeUrl: string | null
+}
 
 export type Moves = {
     move: {
@@ -30,9 +34,14 @@ export type PokemonInfo = {
     sprites: { [key : string]: string },
 };
 
-export type Pokemons = {
-    allpokemons: Array<AllPokemons>
-    pokemonInfo: PokemonInfo,
-    pokemonType: { typeName: string | null, typeUrl: string | null},
-    pokemonsByType: Array<{[key: string]: { name: string, url: string}}>,
+export type PokemonsByType = {
+    [key: string]: AllTypes,
 };
+
+export type Pokemons = {
+    allpokemons: Array<Pokemon>
+    pokemonInfo: PokemonInfo,
+    pokemonType: PokemonType,
+    pokemonsByType: Array<PokemonsByType>,
+};
+

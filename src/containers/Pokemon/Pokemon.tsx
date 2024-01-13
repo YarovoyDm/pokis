@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { getPokemonInfo } from 'API';
-import { useAppSelector, useAppDispatch } from "reducers";
+import { useAppSelector, useAppDispatch } from "store";
 import {
     updatePokemonInfo,
     updatePokemonType,
     selectPokemonInfo,
-} from 'reducers/PokemonsReducer';
-import { Moves, PokemonTypes } from 'types/Pokemons';
+} from 'store/pokemons';
+import { Moves, PokemonTypes, PokemonInfo } from 'types/Pokemons';
 
 import styles from './Pokemon.module.scss';
 
@@ -15,7 +15,7 @@ const Pokemon:React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { pokemonName } = useParams();
-    const pokemonInfo = useAppSelector(selectPokemonInfo);
+    const pokemonInfo: PokemonInfo = useAppSelector(selectPokemonInfo);
 
     const [isLoading, setIsloading] = useState<boolean>(true);
 
@@ -27,10 +27,10 @@ const Pokemon:React.FC = () => {
     }, [pokemonName]);
 
     const { types, name, moves, sprites } = pokemonInfo;
-    const pokemonAvatar = useMemo((): string => "url("+ `${sprites && sprites.front_default}` +")", [sprites]);
+    const pokemonAvatar = useMemo((): string => `url(${sprites && sprites.front_default})`, [sprites]);
 
-    const typesRender = useCallback(() => {
-        const onTypeClick = (data: PokemonTypes) => {
+    const typesRender = useCallback((): Array<React.ReactElement> => {
+        const onTypeClick = (data: PokemonTypes): void => {
             const dataForSaving = {
                 typeName: data.type.name,
                 typeUrl: data.type.url,
@@ -45,7 +45,7 @@ const Pokemon:React.FC = () => {
         });
     }, [types]);
 
-    const movesRender = useCallback(() => {
+    const movesRender = useCallback((): Array<React.ReactElement> => {
         return moves && moves.map((item: Moves) => {
             return <div className={styles.move} key={item.move.url}>{item.move.name}</div>;
         });

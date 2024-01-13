@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pokis/static/css/main.bc42e5f1.css",
-    "main.js": "/pokis/static/js/main.df635cad.js",
+    "main.js": "/pokis/static/js/main.c9e5149a.js",
     "static/js/787.7058240f.chunk.js": "/pokis/static/js/787.7058240f.chunk.js",
     "index.html": "/pokis/index.html",
     "main.bc42e5f1.css.map": "/pokis/static/css/main.bc42e5f1.css.map",
-    "main.df635cad.js.map": "/pokis/static/js/main.df635cad.js.map",
+    "main.c9e5149a.js.map": "/pokis/static/js/main.c9e5149a.js.map",
     "787.7058240f.chunk.js.map": "/pokis/static/js/787.7058240f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bc42e5f1.css",
-    "static/js/main.df635cad.js"
+    "static/js/main.c9e5149a.js"
   ]
 }
